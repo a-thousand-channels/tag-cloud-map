@@ -1,0 +1,11 @@
+{
+  "name": "tag-cloud-map",
+  "version": "1.0.0",
+  "main": "script.js",
+  "repository": "git@github.com:a-thousand-channels/tag-cloud-map.git",
+  "author": "Ulf Treger <ulf.treger@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "d3": "^7.9.0"
+  }
+}
