@@ -1,5 +1,75 @@
-
-  // Sample data mit Resources - kann durch externes JSON ersetzt werden
+    const simpplifiedDataWithResources = 
+    [ 
+        {
+          "id": "1",
+          "name": "Tulpen",
+          "url": "",
+          "taggings_count":	2,
+          "places": [
+            {
+              "title": "Botanischer Garten",
+              "tags": ["Tulpen", "Rosen", "Narzissen", "Nelken"]
+            },
+            {
+              "title": "Stadtpark",
+              "tags": ["Tulpen", "Wildblumen"]
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Rosen",
+          "url": "",
+          "taggings_count":	2,
+          "places": [
+            {
+              "title": "Botanischer Garten",
+              "tags": ["Tulpen", "Rosen", "Narzissen", "Nelken"]
+            },
+            {
+              "title": "Zentralfriedhof",
+              "tags": ["Rosen", "Nelken"]
+            }
+          ]
+        },   
+        {
+          "id": "3",
+          "name": "Narzissen",
+          "url": "",
+          "taggings_count":	1,
+          "places": [
+            {
+              "title": "Botanischer Garten",
+              "tags": ["Tulpen", "Rosen", "Narzissen", "Nelken"]
+            }
+          ]
+        },   
+        {
+          "id": "4",
+          "name": "Nelken",
+          "url": "",
+          "taggings_count":	1,
+          "places": [
+            {
+              "title": "Botanischer Garten",
+              "tags": ["Tulpen", "Rosen", "Narzissen", "Nelken"]
+            }
+          ]
+        }, 
+        {
+          "id": "5",
+          "name": "Wildblumen",
+          "url": "",
+          "taggings_count":	1,
+          "places": [
+            {
+              "title": "Stadtpark",
+              "tags": ["Tulpen", "Wildblumen"]
+            }
+          ]
+        },         
+    ]
+  // Sample data 
     const sampleDataWithResources = 
       [
         {
@@ -157,7 +227,7 @@
     }
 
     // Daten transformieren
-    const sampleData = transformResourceDataToLinkData(sampleDataWithResources);
+    const sampleData = transformResourceDataToLinkData(simpplifiedDataWithResources);
 
     // Visualisierung erstellen
     class KnowledgeMap {
@@ -291,6 +361,7 @@
         */
         
         // Tooltips für die Verbindungen hinzufügen
+        /*
         nodeGroup.append("title")
         .text(d => {
         console.log("Node Data:", d.places);
@@ -299,6 +370,7 @@
             'Keine Resources';
         return `${resourceList}`;
         });
+        */
 
         const list = document.getElementById('list');
         // Knoten in der Liste anzeigen
@@ -309,10 +381,10 @@
             const nodeInfo = document.createElement('div');
             nodeInfo.className = 'node-info';
             nodeInfo.innerHTML = `
-              <strong>${d.name}</strong> (${d.taggings_count} Tags)<br>
-              <strong>Places:</strong><br>
+              <p><strong>${d.name}</strong> <small>${d.taggings_count} Places</small></p>
+              
               <ul>
-                ${d.places ? d.places.map(r => `<li>${r.title}: ${r.tags.join(', ')}</li>`).join('') : '<li>Keine Ressourcen</li>'}
+                ${d.places ? d.places.map(r => `<li><p>${r.title}</p><small>${r.tags.join(', ')}</small></li>`).join('') : '<li>Keine Ressourcen</li>'}
               </ul>
             `;
             list.appendChild(nodeInfo);

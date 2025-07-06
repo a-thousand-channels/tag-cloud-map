@@ -90,6 +90,9 @@
       cursor: pointer;
       border-radius: 4px;
     }
+    p {
+      margin: 0 0 5px 0;
+    }
     ul {
       padding: 0;
       margin: 0;
@@ -104,7 +107,32 @@
 
       margin: 0 0 7px 0;
     }
+    .loading-text {
+      letter-spacing: 1px;
+      font-size: 1.2em;
+      color: #ccc;
+      font-family: inherit;
+    }
 
+    .loading-text .dot-1,
+    .loading-text .dot-2,
+    .loading-text .dot-3 {
+      opacity: 0;
+      animation: blink 1.4s infinite;
+    }
+
+    .loading-text .dot-2 {
+      animation-delay: 0.2s;
+    }
+    .loading-text .dot-3 {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes blink {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -116,7 +144,8 @@
     </div>
     <div id="main" class="main">
       <div id="graph"></div>
-      <div id="list"></div>
+      <div id="list"><span class="loading-text">Loading<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span></span></div>
+
     </div>
 
 
