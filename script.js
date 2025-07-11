@@ -1,4 +1,4 @@
-    const simpplifiedDataWithResources = 
+    const simplifiedDataWithResources = 
     [ 
         {
           "id": "1",
@@ -69,112 +69,7 @@
           ]
         },         
     ]
-  // Sample data 
-    const sampleDataWithResources = 
-      [
-        {
-          "id": "1",
-          "name": "JavaScript",
-          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript",
-          "taggings_count":	2,
-          "places": [
-            {
-              "title": "Frontend Development",
-              "tags": ["HTML5", "CSS", "React", "Vue.js"]
-            },
-            {
-              "title": "Data Visualization",
-              "tags": ["D3.js", "CSS"]
-            }
-          ]
-        },
-        {
-          "id": "2",
-          "name": "HTML5",
-          "url": "https://developer.mozilla.org/de/docs/Web/HTML",
-          "taggings_count":	4,
-          "places": [
-            {
-              "title": "Web Standards",
-              "tags": ["CSS", "JavaScript"]
-            },
-            {
-              "title": "Frontend Frameworks",
-              "tags": ["React", "Vue.js", "Angular"]
-            },
-            {
-              "title": "Frontend Frameworks Helper",
-              "tags": ["React", "Vue.js", "Angular"]
-            },
-            {
-              "title": "Frontend Frameworks Testing",
-              "tags": ["React"]
-            }         
-          ]
-        },
-        {
-          "id": "3",
-          "name": "CSS",
-          "url": "https://developer.mozilla.org/de/docs/Web/CSS",
-          "taggings_count":	1,
-          "places": [
-            {
-              "title": "Styling",
-              "tags": ["HTML5", "React", "Vue.js"]
-            }
-          ]
-        },
-        {
-          "id": "4",
-          "name": "React",
-          "url": "https://reactjs.org/",
-          "taggings_count":	1,
-          "places": [
-            {
-              "title": "Component Libraries",
-              "tags": ["Vue.js", "Angular"]
-            }
-          ]
-        },
-        {
-          "id": "5",
-          "name": "Vue.js",
-          "url": "https://vuejs.org/",
-          "taggings_count":	1,
-          "places": [
-            {
-              "title": "Progressive Framework",
-              "tags": ["React", "Angular"]
-            }
-          ]
-        },
-        {
-          "id": "6",
-          "name": "Angular",
-          "url": "https://angular.io/",
-          "taggings_count":	1,
-          "places": [
-            {
-              "title": "Enterprise Framework",
-              "tags": ["React", "Vue.js"]
-            }
-          ]
-        },
-        {
-          "id": "7",
-          "name": "D3.js",
-          "url": "https://d3js.org/",
-          "taggings_count":	1,
-          "places": [
-            {
-              "title": "Visualization Library",
-              "tags": ["JavaScript", "CSS"]
-            }
-          ]
-        }
-     ];
 
-    // Funktion zum Umwandeln von Resource-based Data in Link-based Data
     function transformResourceDataToLinkData(resourceData) {
       const nodes = resourceData;
       console.log("Original Nodes:", nodes);
@@ -227,9 +122,8 @@
     }
 
     // Daten transformieren
-    const sampleData = transformResourceDataToLinkData(simpplifiedDataWithResources);
+    // const sampleData = transformResourceDataToLinkData(simplifiedDataWithResources);
 
-    // Visualisierung erstellen
     class KnowledgeMap {
       constructor(data, containerId) {
         this.data = data;
@@ -242,7 +136,6 @@
       }
       
       initialize() {
-        // SVG erstellen
         this.svg = this.container.append("svg")
           .attr("width", this.width)
           .attr("height", this.height);
@@ -258,7 +151,6 @@
         this.createLinks();
         this.createNodes();
         
-        // Simulation starten
         this.simulation
           .nodes(this.data.nodes)
           .on("tick", () => this.ticked());
@@ -266,11 +158,9 @@
         this.simulation.force("link")
           .links(this.data.links);
           
-        // Event Listener für die Buttons
         d3.select("#resetBtn").on("click", () => this.resetPosition());
         d3.select("#toggleForceBtn").on("click", () => this.toggleForce());
           
-        // Zoom-Funktionalität
         const zoom = d3.zoom()
           .scaleExtent([0.1, 8])
           .on("zoom", (event) => {
@@ -281,7 +171,6 @@
       }
       
       createDefs() {
-        // Pfeil-Marker für die Verbindungen
         this.svg.append("defs").selectAll("marker")
           .data(["end"])
           .enter().append("marker")
@@ -297,7 +186,6 @@
       }
       
       createLinks() {
-        // Verbindungen zwischen den Knoten
         this.link = this.svg.append("g")
           .selectAll("path")
           .data(this.data.links)
@@ -307,7 +195,6 @@
       }
       
       createNodes() {
-        // Knoten erstellen
         const nodeGroup = this.svg.append("g")
           .selectAll(".node")
           .data(this.data.nodes)
@@ -315,7 +202,6 @@
           .attr("class", "node")
           .call(this.drag(this.simulation));
           
-        // Kreise für die Knoten
         nodeGroup.append("circle")
           .attr("r", 2)
           .attr("fill", (d, i) => d3.schemeCategory10[i % 10]);
@@ -326,7 +212,6 @@
           .attr("text-anchor", "middle")
           .attr("fill", "black")
           .attr("font-size", d => {
-            // Skalierung: z.B. 12px + 2*taggings_count, min 12px, max 24px
             const size = 8 + (d.taggings_count ? d.taggings_count : 0);
             return Math.max(8, Math.min(size, 20)) + "px";
         })
@@ -353,14 +238,14 @@
               .style("fill", "#cc0");
           });
           
-        // Klick-Handler für die Knoten
+        // Klick-Handler 
         /*
         nodeGroup.on("click", (event, d) => {
           window.open(d.url, "_blank");
         });
         */
         
-        // Tooltips für die Verbindungen hinzufügen
+        // Tooltips 
         /*
         nodeGroup.append("title")
         .text(d => {
@@ -381,7 +266,7 @@
             const nodeInfo = document.createElement('div');
             nodeInfo.className = 'node-info';
             nodeInfo.innerHTML = `
-              <p><strong>${d.name}</strong> <small>${d.taggings_count} Places</small></p>
+              <h3>${d.name} <small>(${d.taggings_count} Places)</small></h3>
               
               <ul>
                 ${d.places ? d.places.map(r => `<li><p>${r.title}</p><small>${r.tags.join(', ')}</small></li>`).join('') : '<li>Keine Ressourcen</li>'}
@@ -471,33 +356,29 @@
     }
 
     // Erstellen der Knowledge Map
-    const knowledgeMap = new KnowledgeMap(sampleData, "graph");
-    
-    // Funktion zum Laden externer Daten
-    function loadExternalData(url) {
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          knowledgeMap.updateData(data);
-        })
-        .catch(error => console.error("Fehler beim Laden der Daten:", error));
-    }
-    
+    // const knowledgeMap = new KnowledgeMap(sampleData, "graph");
+
+    const loadingElement = document.getElementById('loading');
     // Funktion zum Laden externer Resource-based Daten
     function loadExternalResourceData(url) {
       fetch(url)
         .then(response => response.json())
         .then(resourceData => {
           const transformedData = transformResourceDataToLinkData(resourceData);
-          knowledgeMap.updateData(transformedData);
+          const knowledgeMap = new KnowledgeMap(transformedData, "graph");
+          // knowledgeMap.updateData(transformedData);
+          loadingElement.style.display = 'none';
+          
         })
         .catch(error => console.error("Fehler beim Laden der Daten:", error));
     }
     
     // Beispiel für das Laden externer Daten:
     loadExternalResourceData('https://orte-backend-staging.a-thousand-channels.xyz/public/maps/from-gay-to-queer/tags');
-    // loadExternalResourceData('https://orte-backend-staging.a-thousand-channels.xyz/public/maps/a-thousand-channels/tags');
-    
+    const title = document.getElementById('title');
+    title.textContent = "From Gay To Queer";
+
+
     // Resize-Handler
     window.addEventListener('resize', () => {
       const width = document.getElementById('graph').getBoundingClientRect().width;
