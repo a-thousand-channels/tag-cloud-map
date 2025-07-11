@@ -374,7 +374,7 @@
     }
     
     // Beispiel für das Laden externer Daten:
-    loadExternalResourceData('https://orte-backend-staging.a-thousand-channels.xyz/public/maps/from-gay-to-queer/tags');
+    loadExternalResourceData('https://orte-backend.a-thousand-channels.xyz/public/maps/from-gay-to-queer/tags');
     const title = document.getElementById('title');
     title.textContent = "From Gay To Queer";
 
